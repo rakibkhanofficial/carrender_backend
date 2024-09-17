@@ -75,7 +75,7 @@ export class AuthService {
         'Customer',
         'Admin',
         'SuperAdmin',
-        'DeliveryMan',
+        'Driver',
         'CustomerService',
       ].includes(role)
     ) {
