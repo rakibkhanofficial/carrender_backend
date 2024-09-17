@@ -2,7 +2,7 @@
 /node_modules
 /build
 /tsconfig.build.json
-# /dist
+/dist
 # Logs
 logs
 *.log
@@ -14,7 +14,7 @@ lerna-debug.log*
 
 # OS
 .DS_Store
-
+.env
 # Tests
 /coverage
 /.nyc_output
