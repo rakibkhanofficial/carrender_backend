@@ -25,6 +25,34 @@ let CarController = class CarController {
     constructor(carService) {
         this.carService = carService;
     }
+    async getPublicList(request, response) {
+        try {
+            const cars = await this.carService.getPublicList();
+            return response.status(200).json({
+                statusCode: 200,
+                message: 'Car list was successfully retrieved',
+                data: cars,
+            });
+        }
+        catch (error) {
+            console.error('Error in getPublicList:', error);
+            return response.status(500).json({
+                statusCode: 500,
+                message: 'An error occurred while fetching the car list',
+                error: error.message,
+            });
+        }
+    }
+    async getPublicDetailsBySlug(request, response, slug) {
+        try {
+            const data = await this.carService.findBySlug(slug);
+            return response.status(httpCodes_1.SUCCESS).json((0, http_1.success)(data));
+        }
+        catch (error) {
+            console.log(error);
+            return response.status(httpCodes_1.REQUEST_ERROR).json((0, http_1.requestInvalid)(error));
+        }
+    }
     async findAll(request, response) {
         try {
             const cars = await this.carService.findAll();
@@ -123,36 +151,25 @@ let CarController = class CarController {
             return response.status(httpCodes_1.REQUEST_ERROR).json((0, http_1.requestInvalid)(error));
         }
     }
-    async getPublicList(request, response) {
-        try {
-            const cars = await this.carService.getPublicList();
-            return response.status(200).json({
-                statusCode: 200,
-                message: 'Car list was successfully retrieved',
-                data: cars,
-            });
-        }
-        catch (error) {
-            console.error('Error in getPublicList:', error);
-            return response.status(500).json({
-                statusCode: 500,
-                message: 'An error occurred while fetching the car list',
-                error: error.message,
-            });
-        }
-    }
-    async getPublicDetailsBySlug(request, response, slug) {
-        try {
-            const data = await this.carService.findBySlug(slug);
-            return response.status(httpCodes_1.SUCCESS).json((0, http_1.success)(data));
-        }
-        catch (error) {
-            console.log(error);
-            return response.status(httpCodes_1.REQUEST_ERROR).json((0, http_1.requestInvalid)(error));
-        }
-    }
 };
 exports.CarController = CarController;
+__decorate([
+    (0, common_1.Get)('public-list'),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], CarController.prototype, "getPublicList", null);
+__decorate([
+    (0, common_1.Get)('public-details/:slug'),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Param)('slug')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, String]),
+    __metadata("design:returntype", Promise)
+], CarController.prototype, "getPublicDetailsBySlug", null);
 __decorate([
     (0, common_1.Get)(),
     (0, common_1.UseGuards)(token_validation_guard_1.TokenValidationGuard, roles_guard_1.RolesGuard),
@@ -226,23 +243,6 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object, Number]),
     __metadata("design:returntype", Promise)
 ], CarController.prototype, "remove", null);
-__decorate([
-    (0, common_1.Get)('public-list'),
-    __param(0, (0, common_1.Req)()),
-    __param(1, (0, common_1.Res)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", Promise)
-], CarController.prototype, "getPublicList", null);
-__decorate([
-    (0, common_1.Get)('public-details/:slug'),
-    __param(0, (0, common_1.Req)()),
-    __param(1, (0, common_1.Res)()),
-    __param(2, (0, common_1.Param)('slug')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, String]),
-    __metadata("design:returntype", Promise)
-], CarController.prototype, "getPublicDetailsBySlug", null);
 exports.CarController = CarController = __decorate([
     (0, common_1.Controller)('cars'),
     __metadata("design:paramtypes", [car_service_1.CarService])

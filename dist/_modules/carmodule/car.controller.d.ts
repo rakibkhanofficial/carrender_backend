@@ -9,6 +9,8 @@ interface RequestWithUser extends Request {
 export declare class CarController {
     private readonly carService;
     constructor(carService: CarService);
+    getPublicList(request: Request, response: Response): Promise<Response<any, Record<string, any>>>;
+    getPublicDetailsBySlug(request: Request, response: Response, slug: string): Promise<Response<any, Record<string, any>>>;
     findAll(request: Request, response: Response): Promise<Response<any, Record<string, any>>>;
     getCarsByCategory(categoryId: number, page?: number, limit?: number): Promise<{
         data: {
@@ -128,7 +130,5 @@ export declare class CarController {
     create(request: RequestWithUser, response: Response, carDto: CarDto): Promise<Response<any, Record<string, any>>>;
     update(request: Request, response: Response, id: number, carDto: CarDto): Promise<Response<any, Record<string, any>>>;
     remove(request: Request, response: Response, id: number): Promise<Response<any, Record<string, any>>>;
-    getPublicList(request: Request, response: Response): Promise<Response<any, Record<string, any>>>;
-    getPublicDetailsBySlug(request: Request, response: Response, slug: string): Promise<Response<any, Record<string, any>>>;
 }
 export {};

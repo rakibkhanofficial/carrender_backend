@@ -30,6 +30,40 @@ interface RequestWithUser extends Request {
 export class CarController {
   constructor(private readonly carService: CarService) {}
 
+  @Get('public-list')
+  async getPublicList(@Req() request: Request, @Res() response: Response) {
+    try {
+      const cars = await this.carService.getPublicList();
+      return response.status(200).json({
+        statusCode: 200,
+        message: 'Car list was successfully retrieved',
+        data: cars,
+      });
+    } catch (error) {
+      console.error('Error in getPublicList:', error);
+      return response.status(500).json({
+        statusCode: 500,
+        message: 'An error occurred while fetching the car list',
+        error: error.message,
+      });
+    }
+  }
+
+  @Get('public-details/:slug')
+  async getPublicDetailsBySlug(
+    @Req() request: Request,
+    @Res() response: Response,
+    @Param('slug') slug: string,
+  ) {
+    try {
+      const data = await this.carService.findBySlug(slug);
+      return response.status(SUCCESS).json(success(data));
+    } catch (error) {
+      console.log(error);
+      return response.status(REQUEST_ERROR).json(requestInvalid(error));
+    }
+  }
+
   @Get()
   @UseGuards(TokenValidationGuard, RolesGuard)
   @Roles('Admin', 'SuperAdmin')
@@ -178,40 +212,6 @@ export class CarController {
         .status(SUCCESS)
         .json(success({ message: 'Car deleted successfully' }));
     } catch (error) {
-      return response.status(REQUEST_ERROR).json(requestInvalid(error));
-    }
-  }
-
-  @Get('public-list')
-  async getPublicList(@Req() request: Request, @Res() response: Response) {
-    try {
-      const cars = await this.carService.getPublicList();
-      return response.status(200).json({
-        statusCode: 200,
-        message: 'Car list was successfully retrieved',
-        data: cars,
-      });
-    } catch (error) {
-      console.error('Error in getPublicList:', error);
-      return response.status(500).json({
-        statusCode: 500,
-        message: 'An error occurred while fetching the car list',
-        error: error.message,
-      });
-    }
-  }
-
-  @Get('public-details/:slug')
-  async getPublicDetailsBySlug(
-    @Req() request: Request,
-    @Res() response: Response,
-    @Param('slug') slug: string,
-  ) {
-    try {
-      const data = await this.carService.findBySlug(slug);
-      return response.status(SUCCESS).json(success(data));
-    } catch (error) {
-      console.log(error);
       return response.status(REQUEST_ERROR).json(requestInvalid(error));
     }
   }
