@@ -48,6 +48,10 @@ export class CreateCarBookingDto {
   @IsString()
   pickupLocationAddress: string;
 
+  @IsNotEmpty()
+  @IsNumber()
+  totalBookingPrice: number;
+
   @IsOptional()
   @IsString()
   pickupLocationMapLink?: string;

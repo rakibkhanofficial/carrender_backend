@@ -3,7 +3,8 @@ export declare class CarDto {
     readonly description: string;
     readonly slug: string;
     readonly image?: string;
-    readonly pricePerDay: number;
+    readonly pricePerHour: number;
+    readonly pricePerMile: number;
     readonly model: string;
     readonly year: number;
     readonly make: string;

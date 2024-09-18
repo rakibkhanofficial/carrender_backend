@@ -76,7 +76,7 @@ export class CarBooking {
   dropoffLocationMapLink: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
-  rentalPrice: number;
+  totalBookingPrice: number;
 
   @Column({ type: 'varchar', length: 255, nullable: false })
   renterName: string;

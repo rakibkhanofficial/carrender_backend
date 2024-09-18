@@ -49,7 +49,11 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ type: 'decimal', precision: 10, scale: 2, nullable: false }),
     __metadata("design:type", Number)
-], Car.prototype, "pricePerDay", void 0);
+], Car.prototype, "pricePerHour", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'decimal', precision: 10, scale: 2, nullable: false }),
+    __metadata("design:type", Number)
+], Car.prototype, "pricePerMile", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 255, nullable: false }),
     __metadata("design:type", String)

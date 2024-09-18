@@ -21,7 +21,8 @@ export declare class CarController {
             description: string;
             slug: string;
             image: string;
-            pricePerDay: number;
+            pricePerHour: number;
+            pricePerMile: number;
             model: string;
             year: number;
             make: string;
@@ -60,7 +61,8 @@ export declare class CarController {
             description: string;
             slug: string;
             image: string;
-            pricePerDay: number;
+            pricePerHour: number;
+            pricePerMile: number;
             model: string;
             year: number;
             make: string;
@@ -100,7 +102,8 @@ export declare class CarController {
             description: string;
             slug: string;
             image: string;
-            pricePerDay: number;
+            pricePerHour: number;
+            pricePerMile: number;
             model: string;
             year: number;
             make: string;

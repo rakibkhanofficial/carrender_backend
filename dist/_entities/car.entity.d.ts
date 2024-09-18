@@ -9,7 +9,8 @@ export declare class Car {
     description: string;
     slug: string;
     image: string;
-    pricePerDay: number;
+    pricePerHour: number;
+    pricePerMile: number;
     model: string;
     year: number;
     make: string;

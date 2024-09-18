@@ -54,7 +54,7 @@ export class PaymentService {
 
       // Create a PaymentIntent
       const paymentIntent = await this.createPaymentIntent(
-        Math.round(car.pricePerDay * 100), // Stripe expects amount in cents
+        Math.round(createCarBookingDto.totalBookingPrice * 100), // Stripe expects amount in cents
         'usd', // Assuming USD, adjust as needed
       );
 

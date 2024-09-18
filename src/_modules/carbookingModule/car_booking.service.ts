@@ -40,7 +40,6 @@ export class CarBookingService {
       carModel: car.model,
       carName: car.name,
       carImage: car.image,
-      rentalPrice: car.pricePerDay,
       renterName: user.name,
       renterPhone: user.phone,
       paymentStatus:
@@ -108,7 +107,7 @@ export class CarBookingService {
       }
       carBooking.carModel = newCar.model;
       carBooking.carName = newCar.name;
-      carBooking.rentalPrice = newCar.pricePerDay;
+      carBooking.totalBookingPrice = updateCarBookingDto.totalBookingPrice;
     }
 
     Object.assign(carBooking, updateCarBookingDto);

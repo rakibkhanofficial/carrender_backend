@@ -35,7 +35,10 @@ export class Car {
   image: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
-  pricePerDay: number;
+  pricePerHour: number;
+
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
+  pricePerMile: number;
 
   @Column({ type: 'varchar', length: 255, nullable: false })
   model: string;
