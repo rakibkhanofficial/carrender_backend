@@ -26,7 +26,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Car.prototype, "userId", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.products),
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.cars),
     (0, typeorm_1.JoinColumn)({ name: 'userId' }),
     __metadata("design:type", user_entity_1.User)
 ], Car.prototype, "user", void 0);

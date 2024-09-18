@@ -18,7 +18,7 @@ export class Car {
   @Column({ nullable: false })
   userId: number;
 
-  @ManyToOne(() => User, (user) => user.products)
+  @ManyToOne(() => User, (user) => user.cars)
   @JoinColumn({ name: 'userId' })
   user: User;
 

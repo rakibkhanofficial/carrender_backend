@@ -15,6 +15,8 @@ import { BlobService } from '../_modules/blobmodule/blob.service';
 import { Image } from '../_entities/image.entity';
 import { CategoryModule } from '../_modules/category/category.module';
 import { SubCategoryModule } from '../_modules/subcategory/subcategory.module';
+import { CarBookingModule } from '../_modules/carbookingModule/car_booking.module';
+import { PaymentModule } from '../_modules/paymentmodule/payment.module';
 
 @Module({
   imports: [
@@ -33,6 +35,8 @@ import { SubCategoryModule } from '../_modules/subcategory/subcategory.module';
     CategoryModule,
     SubCategoryModule,
     CarModule,
+    CarBookingModule,
+    PaymentModule,
   ],
   controllers: [AppController, BlobController],
   providers: [JwtService, AppService, BlobService],

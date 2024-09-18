@@ -18,5 +18,6 @@ import { SubCategoryModule } from '../subcategory/subcategory.module';
   ],
   providers: [CarService],
   controllers: [CarController],
+  exports: [CarService],
 })
 export class CarModule {}

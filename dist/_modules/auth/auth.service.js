@@ -56,7 +56,7 @@ let AuthService = class AuthService {
             'Customer',
             'Admin',
             'SuperAdmin',
-            'DeliveryMan',
+            'Driver',
             'CustomerService',
         ].includes(role)) {
             throw new common_1.BadRequestException('Invalid role');

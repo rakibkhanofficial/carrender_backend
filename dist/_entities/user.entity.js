@@ -58,7 +58,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.OneToMany)(() => car_entity_1.Car, (car) => car.user),
     __metadata("design:type", Array)
-], User.prototype, "products", void 0);
+], User.prototype, "cars", void 0);
 __decorate([
     (0, typeorm_1.Column)({ unique: false, nullable: true }),
     __metadata("design:type", String)

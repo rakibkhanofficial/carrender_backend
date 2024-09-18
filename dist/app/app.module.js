@@ -24,6 +24,8 @@ const blob_service_1 = require("../_modules/blobmodule/blob.service");
 const image_entity_1 = require("../_entities/image.entity");
 const category_module_1 = require("../_modules/category/category.module");
 const subcategory_module_1 = require("../_modules/subcategory/subcategory.module");
+const car_booking_module_1 = require("../_modules/carbookingModule/car_booking.module");
+const payment_module_1 = require("../_modules/paymentmodule/payment.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -45,6 +47,8 @@ exports.AppModule = AppModule = __decorate([
             category_module_1.CategoryModule,
             subcategory_module_1.SubCategoryModule,
             car_module_1.CarModule,
+            car_booking_module_1.CarBookingModule,
+            payment_module_1.PaymentModule,
         ],
         controllers: [app_controller_1.AppController, blob_controller_1.BlobController],
         providers: [jwt_1.JwtService, app_service_1.AppService, blob_service_1.BlobService],

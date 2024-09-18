@@ -35,7 +35,7 @@ export class User {
   role: string;
 
   @OneToMany(() => Car, (car) => car.user)
-  products: Car[];
+  cars: Car[];
 
   @Column({ unique: false, nullable: true })
   access_token: string;

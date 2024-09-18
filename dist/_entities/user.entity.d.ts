@@ -10,7 +10,7 @@ export declare class User {
     officeadress: string;
     password: string;
     role: string;
-    products: Car[];
+    cars: Car[];
     access_token: string;
     refresh_token: string;
     access_tokenExpiresIn: string;
