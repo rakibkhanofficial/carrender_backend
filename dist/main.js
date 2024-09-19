@@ -6,6 +6,8 @@ const common_1 = require("@nestjs/common");
 const path_1 = require("path");
 const fs = require("fs");
 const path = require("path");
+const dotenv_1 = require("dotenv");
+(0, dotenv_1.config)();
 function listFiles(dir, fileList = []) {
     const files = fs.readdirSync(dir);
     files.forEach((file) => {
@@ -25,6 +27,7 @@ async function bootstrap() {
         try {
             common_1.Logger.log('Starting application...');
             common_1.Logger.log(`Files in current directory:\n${listFiles(process.cwd()).join('\n')}`);
+            common_1.Logger.log(`STRIPE_SECRET_KEY: ${process.env.STRIPE_SECRET_KEY ? `${process.env.STRIPE_SECRET_KEY}` : 'Not set'}`);
             app = await core_1.NestFactory.create(app_module_1.AppModule);
             common_1.Logger.log('Application created successfully');
             app.useStaticAssets((0, path_1.join)(__dirname, '..', 'public'));

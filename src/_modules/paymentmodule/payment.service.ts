@@ -10,7 +10,10 @@ import Stripe from 'stripe';
 import { CarBooking } from '../../_entities/car_booking.entity';
 import { Car } from '../../_entities/car.entity';
 import { CreateCarBookingDto } from '../carbookingModule/car_booking.dto';
+import { config } from 'dotenv';
 
+// Load environment variables from .env file
+config();
 @Injectable()
 export class PaymentService {
   private stripe: Stripe;
@@ -23,7 +26,7 @@ export class PaymentService {
     private readonly carRepository: Repository<Car>,
   ) {
     this.stripe = new Stripe(
-      this.configService.get<string>(process.env.STRIPE_SECRET_KEY) || '',
+      this.configService.get<string>(`${process.env.STRIPE_SECRET_KEY}`),
       {
         apiVersion: '2024-06-20',
       },
