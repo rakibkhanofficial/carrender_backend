@@ -30,6 +30,7 @@ export class CarBookingController {
   constructor(private readonly carBookingService: CarBookingService) {}
 
   @Post('createbookingbycash')
+  @UseGuards(TokenValidationGuard, RolesGuard)
   @Roles('Customer', 'Admin', 'SuperAdmin')
   async create(@Body() createCarBookingDto: CreateCarBookingDto, @Req() req) {
     if (createCarBookingDto.paymentMethod !== 'cash') {
@@ -50,7 +51,8 @@ export class CarBookingController {
   }
 
   @Get()
-  @Roles('User', 'Admin', 'SuperAdmin')
+  @Roles('Customer', 'Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
   async findAll(
     @Req() request: RequestWithUser,
     @Res() response: Response,
@@ -78,7 +80,8 @@ export class CarBookingController {
   }
 
   @Get(':id')
-  @Roles('User', 'Admin', 'SuperAdmin')
+  @Roles('Customer', 'Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
   async findOne(
     @Req() request: RequestWithUser,
     @Res() response: Response,
@@ -104,7 +107,8 @@ export class CarBookingController {
   }
 
   @Put('update/:id')
-  @Roles('User', 'Admin', 'SuperAdmin')
+  @Roles('Customer', 'Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
   async update(
     @Req() request: RequestWithUser,
     @Res() response: Response,
@@ -132,7 +136,8 @@ export class CarBookingController {
   }
 
   @Delete('delete/:id')
-  @Roles('User', 'Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  @Roles('Customer', 'Admin', 'SuperAdmin')
   async remove(
     @Req() request: RequestWithUser,
     @Res() response: Response,
@@ -155,6 +160,7 @@ export class CarBookingController {
 
   @Put('update-payment/:id')
   @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
   async updatePaymentStatus(
     @Res() response: Response,
     @Param('id') id: string,
