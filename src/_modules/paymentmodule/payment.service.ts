@@ -23,7 +23,7 @@ export class PaymentService {
     private readonly carRepository: Repository<Car>,
   ) {
     this.stripe = new Stripe(
-      this.configService.get<string>('STRIPE_SECRET_KEY') || '',
+      this.configService.get<string>(process.env.STRIPE_SECRET_KEY) || '',
       {
         apiVersion: '2024-06-20',
       },
