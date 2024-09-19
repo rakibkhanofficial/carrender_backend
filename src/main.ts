@@ -59,7 +59,7 @@ if (process.env.NODE_ENV !== 'production') {
     Logger.log(`Application is running on: ${await app.getUrl()}`);
   });
 } else {
-  // For Vercel (production)
+  // For Vercel (production) deploy
   module.exports = async (req: Request, res: Response): Promise<void> => {
     if (!app) {
       app = await bootstrap();
