@@ -24,39 +24,55 @@ interface RequestWithUser extends Request {
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 
-  @Post('process-online-payment')
+  @Post('create-payment-intent')
   @Roles('Customer', 'Admin', 'SuperAdmin')
-  async processOnlinePayment(
+  async createPaymentIntent(
+    @Body() { amount }: { amount: number },
+    @Req() req: RequestWithUser,
+  ) {
+    try {
+      const paymentIntent = await this.paymentService.createPaymentIntent(
+        amount,
+        'usd',
+      );
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Payment intent created successfully',
+        data: { clientSecret: paymentIntent.client_secret },
+      };
+    } catch (error) {
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: 'An error occurred while creating the payment intent',
+          error: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  @Post('create-booking-after-payment')
+  @Roles('Customer', 'Admin', 'SuperAdmin')
+  async createBookingAfterPayment(
     @Body() createCarBookingDto: CreateCarBookingDto,
     @Req() req: RequestWithUser,
   ) {
     try {
-      if (createCarBookingDto.paymentMethod !== 'online') {
-        throw new HttpException(
-          'This endpoint is for online payments only. For cash payments, use the car-bookings/createbookingbycash endpoint.',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-
-      const result =
-        await this.paymentService.processOnlinePaymentAndCreateBooking(
-          createCarBookingDto,
-          req.user.userId,
-        );
-
+      const booking = await this.paymentService.createBookingAfterPayment(
+        createCarBookingDto,
+        req.user.userId,
+      );
       return {
-        statusCode: HttpStatus.OK,
-        message: 'Payment intent created and booking initiated',
-        data: result,
+        statusCode: HttpStatus.CREATED,
+        message: 'Booking created successfully after payment',
+        data: booking,
       };
     } catch (error) {
-      if (error instanceof HttpException) {
-        throw error;
-      }
       throw new HttpException(
         {
           statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-          message: 'An error occurred while processing the online payment',
+          message: 'An error occurred while creating the booking',
           error: error.message,
         },
         HttpStatus.INTERNAL_SERVER_ERROR,

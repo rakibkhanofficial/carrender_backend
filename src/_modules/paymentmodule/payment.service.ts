@@ -23,7 +23,7 @@ export class PaymentService {
     private readonly carRepository: Repository<Car>,
   ) {
     this.stripe = new Stripe(
-      this.configService.get<string>(process.env.STRIPE_SECRET_KEY) || '',
+      this.configService.get<string>('STRIPE_SECRET_KEY') || '',
       {
         apiVersion: '2024-06-20',
       },
@@ -40,10 +40,10 @@ export class PaymentService {
     });
   }
 
-  async processOnlinePaymentAndCreateBooking(
+  async createBookingAfterPayment(
     createCarBookingDto: CreateCarBookingDto,
     userId: number,
-  ): Promise<{ booking: CarBooking; clientSecret: string }> {
+  ): Promise<CarBooking> {
     try {
       const car = await this.carRepository.findOne({
         where: { id: createCarBookingDto.carId },
@@ -52,34 +52,21 @@ export class PaymentService {
         throw new NotFoundException('Car not found');
       }
 
-      // Create a PaymentIntent
-      const paymentIntent = await this.createPaymentIntent(
-        Math.round(createCarBookingDto.totalBookingPrice * 100), // Stripe expects amount in cents
-        'usd', // Assuming USD, adjust as needed
-      );
-
-      // Create the booking with pending status
       const booking = this.carBookingRepository.create({
         ...createCarBookingDto,
         userId,
         paymentMethod: 'online',
-        paymentStatus: 'Pending',
-        stripePaymentIntentId: paymentIntent.id,
+        paymentStatus: 'Paid',
       });
 
-      const savedBooking = await this.carBookingRepository.save(booking);
-
-      return {
-        booking: savedBooking,
-        clientSecret: paymentIntent.client_secret || '',
-      };
+      return await this.carBookingRepository.save(booking);
     } catch (error) {
-      console.error('Error in processOnlinePaymentAndCreateBooking:', error);
+      console.error('Error in createBookingAfterPayment:', error);
       if (error instanceof NotFoundException) {
         throw error;
       } else {
         throw new InternalServerErrorException(
-          'An error occurred while processing the payment and creating the booking',
+          'An error occurred while creating the booking',
         );
       }
     }
