@@ -10,6 +10,7 @@ import Stripe from 'stripe';
 import { CarBooking } from '../../_entities/car_booking.entity';
 import { Car } from '../../_entities/car.entity';
 import { CreateCarBookingDto } from '../carbookingModule/car_booking.dto';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class PaymentService {
@@ -21,6 +22,7 @@ export class PaymentService {
     private readonly carBookingRepository: Repository<CarBooking>,
     @InjectRepository(Car)
     private readonly carRepository: Repository<Car>,
+    private readonly userService: UserService,
   ) {
     const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
     if (!stripeSecretKey) {
@@ -54,9 +56,19 @@ export class PaymentService {
         throw new NotFoundException('Car not found');
       }
 
+      const user = await this.userService.findUserById(userId);
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
+
       const booking = this.carBookingRepository.create({
         ...createCarBookingDto,
         userId,
+        carModel: car.model,
+        carName: car.name,
+        carImage: car.image,
+        renterName: user.name,
+        renterPhone: user.phone,
         paymentMethod: 'online',
         paymentStatus: 'Paid',
       });

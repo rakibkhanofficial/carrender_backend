@@ -6,12 +6,14 @@ import { PaymentController } from './payment.controller';
 import { CarBooking } from '../../_entities/car_booking.entity';
 import { Car } from '../../_entities/car.entity';
 import { AuthModule } from '../auth/auth.module';
+import { UserModule } from '../user/user.module';
 
 @Module({
   imports: [
     ConfigModule,
     TypeOrmModule.forFeature([CarBooking, Car]),
     forwardRef(() => AuthModule),
+    UserModule,
   ],
   providers: [PaymentService],
   controllers: [PaymentController],
