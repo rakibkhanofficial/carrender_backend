@@ -69,7 +69,7 @@ export class PaymentService {
         carImage: car.image,
         renterName: user.name,
         renterPhone: user.phone,
-        bookingStatus: 'Pending',
+        rideStatus: 'Pending',
         paymentMethod: 'online',
         paymentStatus: 'Paid',
       });
