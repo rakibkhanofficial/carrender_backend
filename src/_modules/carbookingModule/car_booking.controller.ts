@@ -50,14 +50,16 @@ export class CarBookingController {
     };
   }
 
-  @Get()
-  @Roles('Customer', 'Admin', 'SuperAdmin')
+  @Get('/carBookingsbyuser/:page/:limit')
+  @Roles('Customer')
   @UseGuards(TokenValidationGuard, RolesGuard)
   async findAll(
     @Req() request: RequestWithUser,
     @Res() response: Response,
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 10,
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+    // @Query('page') page: number = 1,
+    // @Query('limit') limit: number = 10,
   ) {
     try {
       const bookings = await this.carBookingService.findAll(
