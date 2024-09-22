@@ -54,6 +54,9 @@ export class CarBooking {
   @Column({ type: 'varchar', length: 20, nullable: false })
   mobileNumber: string;
 
+  @Column({ type: 'varchar', length: 20, nullable: false })
+  bookingStatus: string;
+
   @Column({ unique: false, type: 'longtext', nullable: true })
   carImage: string;
 

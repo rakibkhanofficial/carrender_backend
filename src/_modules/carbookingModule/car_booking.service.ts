@@ -20,7 +20,7 @@ export class CarBookingService {
     private readonly userService: UserService,
     private readonly paymentService: PaymentService,
   ) {}
-  async create(
+  async CashBookingcreate(
     createCarBookingDto: CreateCarBookingDto,
     userId: number,
   ): Promise<CarBooking> {
@@ -42,10 +42,9 @@ export class CarBookingService {
       carImage: car.image,
       renterName: user.name,
       renterPhone: user.phone,
-      paymentStatus:
-        createCarBookingDto.paymentMethod === 'cash'
-          ? 'Pending'
-          : createCarBookingDto.paymentStatus,
+      bookingStatus: 'Pending',
+      paymentStatus: 'Pending',
+      paymentMethod: 'cash',
     });
 
     return this.carBookingRepository.save(carBooking);
@@ -68,7 +67,6 @@ export class CarBookingService {
       take: limit,
       order: { createdAt: 'DESC' },
     });
-
     return {
       data: bookings,
       total,

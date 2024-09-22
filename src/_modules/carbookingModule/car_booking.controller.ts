@@ -39,7 +39,7 @@ export class CarBookingController {
       );
     }
 
-    const booking = await this.carBookingService.create(
+    const booking = await this.carBookingService.CashBookingcreate(
       createCarBookingDto,
       req.user.userId,
     );
@@ -62,7 +62,7 @@ export class CarBookingController {
     // @Query('limit') limit: number = 10,
   ) {
     try {
-      const bookings = await this.carBookingService.findAll(
+      const data = await this.carBookingService.findAll(
         request.user.userId,
         page,
         limit,
@@ -70,7 +70,7 @@ export class CarBookingController {
       return response.status(200).json({
         statusCode: 200,
         message: 'Car booking list was successfully retrieved',
-        data: bookings,
+        data,
       });
     } catch (error) {
       return response.status(500).json({
