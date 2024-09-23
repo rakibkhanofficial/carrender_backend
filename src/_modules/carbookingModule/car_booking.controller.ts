@@ -58,8 +58,6 @@ export class CarBookingController {
     @Res() response: Response,
     @Param('page') page: number,
     @Param('limit') limit: number,
-    // @Query('page') page: number = 1,
-    // @Query('limit') limit: number = 10,
   ) {
     try {
       const data = await this.carBookingService.findAll(
@@ -81,7 +79,7 @@ export class CarBookingController {
     }
   }
 
-  @Get(':id')
+  @Get('/carbookingdetails/:id')
   @Roles('Customer', 'Admin', 'SuperAdmin')
   @UseGuards(TokenValidationGuard, RolesGuard)
   async findOne(

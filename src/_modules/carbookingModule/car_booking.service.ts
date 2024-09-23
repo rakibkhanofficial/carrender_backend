@@ -55,17 +55,25 @@ export class CarBookingService {
     page: number = 1,
     limit: number = 10,
   ): Promise<{
-    data: CarBooking[];
+    data: Partial<CarBooking>[];
     total: number;
     page: number;
     limit: number;
   }> {
     const [bookings, total] = await this.carBookingRepository.findAndCount({
       where: { userId },
-      relations: ['car', 'user'],
       skip: (page - 1) * limit,
       take: limit,
       order: { createdAt: 'DESC' },
+      select: [
+        'id',
+        'tripType',
+        'totalBookingPrice',
+        'rideStatus',
+        'paymentMethod',
+        'paymentStatus',
+        'carImage',
+      ],
     });
     return {
       data: bookings,
@@ -78,7 +86,7 @@ export class CarBookingService {
   async findOne(id: number, userId: number): Promise<CarBooking> {
     const carBooking = await this.carBookingRepository.findOne({
       where: { id, userId },
-      relations: ['car', 'user'],
+      // relations: ['car', 'user'],
     });
 
     if (!carBooking) {
