@@ -60,6 +60,12 @@ export class CarBookingController {
     @Param('limit') limit: number,
   ) {
     try {
+      if (!request.user || !request.user.userId) {
+        return {
+          statusCode: 401,
+          error: 'Unauthorized',
+        };
+      }
       const data = await this.carBookingService.findAll(
         request.user.userId,
         page,
@@ -80,7 +86,7 @@ export class CarBookingController {
   }
 
   @Get('/carbookingdetails/:id')
-  @Roles('Customer', 'Admin', 'SuperAdmin')
+  @Roles('Customer')
   @UseGuards(TokenValidationGuard, RolesGuard)
   async findOne(
     @Req() request: RequestWithUser,
