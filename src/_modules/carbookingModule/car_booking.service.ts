@@ -73,6 +73,16 @@ export class CarBookingService {
         'paymentMethod',
         'paymentStatus',
         'carImage',
+        'pickupDate',
+        'pickupTime',
+        'pickupLocationAddress',
+        'pickupLocationMapLink',
+        'dropoffLocationAddress',
+        'dropoffLocationMapLink',
+        'hour',
+        'distance',
+        'createdAt',
+        'updatedAt',
       ],
     });
     return {
