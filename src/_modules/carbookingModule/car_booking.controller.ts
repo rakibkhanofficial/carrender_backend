@@ -113,8 +113,8 @@ export class CarBookingController {
   }
 
   @Get('/admincarbookingdetails/:id')
-  // @Roles('Admin', 'SuperAdmin')
-  // @UseGuards(TokenValidationGuard, RolesGuard)
+  @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
   async adminfindOne(@Res() response: Response, @Param('id') id: string) {
     try {
       const booking = await this.carBookingService.adminfindOne(+id);
