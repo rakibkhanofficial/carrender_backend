@@ -134,6 +134,52 @@ export class CarBookingService {
     };
   }
 
+  async adminfindOne(id: number): Promise<CarBooking> {
+    const carBooking = await this.carBookingRepository.findOne({
+      where: { id },
+      relations: ['car', 'user'],
+      select: {
+        id: true,
+        tripType: true,
+        totalBookingPrice: true,
+        rideStatus: true,
+        paymentMethod: true,
+        paymentStatus: true,
+        carImage: true,
+        pickupDate: true,
+        pickupTime: true,
+        pickupLocationAddress: true,
+        pickupLocationMapLink: true,
+        dropoffLocationAddress: true,
+        dropoffLocationMapLink: true,
+        airportName: true,
+        hour: true,
+        distance: true,
+        createdAt: true,
+        updatedAt: true,
+        car: {
+          name: true,
+          model: true,
+          make: true,
+          year: true,
+          seatingCapacity: true,
+          fuelType: true,
+        },
+        user: {
+          name: true,
+          email: true,
+          phone: true,
+        },
+      },
+    });
+
+    if (!carBooking) {
+      throw new NotFoundException('Car booking not found');
+    }
+
+    return carBooking;
+  }
+
   async findOne(id: number, userId: number): Promise<CarBooking> {
     const carBooking = await this.carBookingRepository.findOne({
       where: { id, userId },

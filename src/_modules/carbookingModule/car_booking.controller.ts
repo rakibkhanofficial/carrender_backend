@@ -86,8 +86,8 @@ export class CarBookingController {
   }
 
   @Get('/admincarBookinlist/:page/:limit')
-  // @Roles('Customer', 'Admin', 'SuperAdmin')
-  // @UseGuards(TokenValidationGuard, RolesGuard)
+  @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
   async findAllBookingForAdmin(
     @Res() response: Response,
     @Param('page') page: number,
@@ -107,6 +107,26 @@ export class CarBookingController {
       return response.status(500).json({
         statusCode: 500,
         message: 'An error occurred while fetching the car booking list',
+        error: error.message,
+      });
+    }
+  }
+
+  @Get('/admincarbookingdetails/:id')
+  @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async adminfindOne(@Res() response: Response, @Param('id') id: string) {
+    try {
+      const booking = await this.carBookingService.adminfindOne(+id);
+      return response.status(200).json({
+        statusCode: 200,
+        message: 'Car booking was successfully retrieved',
+        data: booking,
+      });
+    } catch (error) {
+      return response.status(500).json({
+        statusCode: 500,
+        message: 'An error occurred while fetching the car booking',
         error: error.message,
       });
     }
