@@ -25,7 +25,7 @@ interface RequestWithUser extends Request {
 }
 
 @Controller('car-bookings')
-@UseGuards(TokenValidationGuard, RolesGuard)
+// @UseGuards(TokenValidationGuard, RolesGuard)
 export class CarBookingController {
   constructor(private readonly carBookingService: CarBookingService) {}
 
@@ -68,6 +68,33 @@ export class CarBookingController {
       }
       const data = await this.carBookingService.findAll(
         request.user.userId,
+        page,
+        limit,
+      );
+      return response.status(200).json({
+        statusCode: 200,
+        message: 'Car booking list was successfully retrieved',
+        data,
+      });
+    } catch (error) {
+      return response.status(500).json({
+        statusCode: 500,
+        message: 'An error occurred while fetching the car booking list',
+        error: error.message,
+      });
+    }
+  }
+
+  @Get('/admincarBookinlist/:page/:limit')
+  // @Roles('Customer', 'Admin', 'SuperAdmin')
+  // @UseGuards(TokenValidationGuard, RolesGuard)
+  async findAllBookingForAdmin(
+    @Res() response: Response,
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+  ) {
+    try {
+      const data = await this.carBookingService.findAllBookingforadmin(
         page,
         limit,
       );

@@ -93,10 +93,51 @@ export class CarBookingService {
     };
   }
 
+  async findAllBookingforadmin(
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<{
+    data: Partial<CarBooking>[];
+    total: number;
+    page: number;
+    limit: number;
+  }> {
+    const [bookings, total] = await this.carBookingRepository.findAndCount({
+      skip: (page - 1) * limit,
+      take: limit,
+      order: { createdAt: 'DESC' },
+      select: [
+        'id',
+        'tripType',
+        'totalBookingPrice',
+        'rideStatus',
+        'paymentMethod',
+        'paymentStatus',
+        'carImage',
+        'pickupDate',
+        'pickupTime',
+        'pickupLocationAddress',
+        'pickupLocationMapLink',
+        'dropoffLocationAddress',
+        'dropoffLocationMapLink',
+        'hour',
+        'distance',
+        'createdAt',
+        'updatedAt',
+      ],
+    });
+    return {
+      data: bookings,
+      total,
+      page,
+      limit,
+    };
+  }
+
   async findOne(id: number, userId: number): Promise<CarBooking> {
     const carBooking = await this.carBookingRepository.findOne({
       where: { id, userId },
-      // relations: ['car', 'user'],
+      relations: ['car', 'user'],
     });
 
     if (!carBooking) {
