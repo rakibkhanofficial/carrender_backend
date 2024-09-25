@@ -96,7 +96,7 @@ export class CarBooking {
   @Column({ type: 'varchar', length: 255, nullable: true })
   stripePaymentIntentId: string;
 
-  @Column({ type: 'varchar', length: 50, default: 'Pending' })
+  @Column({ type: 'varchar', length: 50 })
   paymentStatus: string;
 
   @Column({ type: 'varchar', length: 50, nullable: false })

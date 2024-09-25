@@ -43,7 +43,7 @@ export class CarBookingService {
       renterName: user.name,
       renterPhone: user.phone,
       rideStatus: 'Pending',
-      paymentStatus: 'Pending',
+      paymentStatus: 'Unpaid',
       paymentMethod: 'cash',
     });
 
