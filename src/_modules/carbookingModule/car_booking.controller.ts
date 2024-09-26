@@ -10,6 +10,8 @@ import {
   Res,
   Put,
   Query,
+  HttpStatus,
+  HttpException,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { CarBookingService } from './car_booking.service';
@@ -156,6 +158,29 @@ export class CarBookingController {
         message: 'An error occurred while fetching the car booking',
         error: error.message,
       });
+    }
+  }
+
+  @Put('update-status/:id')
+  @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async updateStatus(@Param('id') id: string, @Body('status') status: string) {
+    try {
+      const booking = await this.carBookingService.updateStatus(+id, status);
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Car booking status was successfully updated',
+        data: booking,
+      };
+    } catch (error) {
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: 'An error occurred while updating the car booking status',
+          error: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 

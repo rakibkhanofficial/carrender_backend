@@ -218,6 +218,26 @@ export class CarBookingService {
     return this.carBookingRepository.save(carBooking);
   }
 
+  async findOneById(id: number): Promise<CarBooking> {
+    const carBooking = await this.carBookingRepository.findOne({
+      where: { id },
+    });
+
+    if (!carBooking) {
+      throw new NotFoundException(`Car booking with ID ${id} not found`);
+    }
+
+    return carBooking;
+  }
+  async updateStatus(id: number, status: string) {
+    const booking = await this.findOneById(id);
+    if (!booking) {
+      throw new NotFoundException(`Booking with ID ${id} not found`);
+    }
+    booking.rideStatus = status;
+    return this.carBookingRepository.save(booking);
+  }
+
   async remove(id: number, userId: number): Promise<void> {
     const carBooking = await this.findOne(id, userId);
     await this.carBookingRepository.remove(carBooking);
