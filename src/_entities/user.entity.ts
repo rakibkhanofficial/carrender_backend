@@ -28,6 +28,9 @@ export class User {
   @Column({ unique: false, nullable: true })
   officeadress: string;
 
+  @Column({ type: 'boolean', default: true })
+  isActive: boolean;
+
   @Column()
   password: string;
 

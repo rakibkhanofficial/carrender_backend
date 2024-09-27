@@ -8,6 +8,7 @@ export declare class User {
     birthdaydate: Date;
     homeaddress: string;
     officeadress: string;
+    isActive: boolean;
     password: string;
     role: string;
     cars: Car[];

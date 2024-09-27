@@ -15,6 +15,7 @@ export declare class AuthController {
             email: string;
             phone: string;
             image: string;
+            isActive: boolean;
             accessToken: string;
             access_tokenExpiresIn: string;
             refreshToken: string;

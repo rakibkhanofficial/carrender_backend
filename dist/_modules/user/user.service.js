@@ -32,6 +32,7 @@ let UserService = class UserService {
                 homeaddress: true,
                 officeadress: true,
                 role: true,
+                isActive: true,
             },
         });
     }
@@ -48,6 +49,7 @@ let UserService = class UserService {
                 homeaddress: true,
                 officeadress: true,
                 role: true,
+                isActive: true,
             },
         });
     }

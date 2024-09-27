@@ -38,6 +38,7 @@ let AuthController = class AuthController {
                 email: user.email,
                 phone: user.phone,
                 image: user.image,
+                isActive: user.isActive,
                 accessToken: tokens.accessToken,
                 access_tokenExpiresIn: tokens.access_tokenExpiresIn,
                 refreshToken: tokens.refreshToken,
