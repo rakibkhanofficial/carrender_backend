@@ -25,6 +25,8 @@ export class UserService {
         officeadress: true,
         role: true,
         isActive: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
   }
@@ -43,6 +45,8 @@ export class UserService {
         officeadress: true,
         role: true,
         isActive: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
   }

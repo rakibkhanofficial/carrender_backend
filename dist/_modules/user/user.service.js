@@ -33,6 +33,8 @@ let UserService = class UserService {
                 officeadress: true,
                 role: true,
                 isActive: true,
+                createdAt: true,
+                updatedAt: true,
             },
         });
     }
@@ -50,6 +52,8 @@ let UserService = class UserService {
                 officeadress: true,
                 role: true,
                 isActive: true,
+                createdAt: true,
+                updatedAt: true,
             },
         });
     }
