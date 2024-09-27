@@ -142,7 +142,7 @@ __decorate([
 ], AuthController.prototype, "adminOnly", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)('Customer', 'Admin', 'SuperAdmin', 'DeliveryMan', 'CustomerService'),
+    (0, roles_decorator_1.Roles)('Customer', 'Admin', 'SuperAdmin', 'Driver', 'CustomerService'),
     (0, common_1.Get)('protected'),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),

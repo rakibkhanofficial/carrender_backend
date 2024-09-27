@@ -8,7 +8,8 @@ interface ApiResponse<T> {
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
-    getUserStart(): string;
+    getAllDriverList(): Promise<ApiResponse<User[]>>;
+    getAllCustomerList(): Promise<ApiResponse<User[]>>;
     getUserByEmail(email: string): Promise<User | undefined>;
     getUserById(id: number): Promise<ApiResponse<Partial<User>>>;
     updateUser(id: number, updateData: {

@@ -19,6 +19,38 @@ let UserService = class UserService {
     async findByEmail(email) {
         return this.userRepository.findByEmail(email);
     }
+    async getAllDriverList() {
+        return this.userRepository.find({
+            where: { role: 'Driver' },
+            select: {
+                userId: true,
+                name: true,
+                email: true,
+                phone: true,
+                image: true,
+                birthdaydate: true,
+                homeaddress: true,
+                officeadress: true,
+                role: true,
+            },
+        });
+    }
+    async getAllCustomerList() {
+        return this.userRepository.find({
+            where: { role: 'Customer' },
+            select: {
+                userId: true,
+                name: true,
+                email: true,
+                phone: true,
+                image: true,
+                birthdaydate: true,
+                homeaddress: true,
+                officeadress: true,
+                role: true,
+            },
+        });
+    }
     async findUserById(id) {
         return this.userRepository.findById(id);
     }

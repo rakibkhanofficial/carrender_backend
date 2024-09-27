@@ -11,6 +11,40 @@ export class UserService {
     return this.userRepository.findByEmail(email);
   }
 
+  async getAllDriverList(): Promise<User[] | undefined> {
+    return this.userRepository.find({
+      where: { role: 'Driver' },
+      select: {
+        userId: true,
+        name: true,
+        email: true,
+        phone: true,
+        image: true,
+        birthdaydate: true,
+        homeaddress: true,
+        officeadress: true,
+        role: true,
+      },
+    });
+  }
+
+  async getAllCustomerList(): Promise<User[] | undefined> {
+    return this.userRepository.find({
+      where: { role: 'Customer' },
+      select: {
+        userId: true,
+        name: true,
+        email: true,
+        phone: true,
+        image: true,
+        birthdaydate: true,
+        homeaddress: true,
+        officeadress: true,
+        role: true,
+      },
+    });
+  }
+
   async findUserById(id: number): Promise<User | undefined> {
     return this.userRepository.findById(id);
   }

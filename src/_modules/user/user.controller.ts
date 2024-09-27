@@ -11,6 +11,8 @@ import {
 import { UserService } from './user.service';
 import { User } from '../../_entities/user.entity';
 import { TokenValidationGuard } from '../../guards/token-validation.guard';
+import { Roles } from '../auth/jwt/roles.decorator';
+import { RolesGuard } from '../auth/jwt/roles.guard';
 
 interface ApiResponse<T> {
   statusCode: number;
@@ -19,14 +21,56 @@ interface ApiResponse<T> {
 }
 
 @Controller('user')
-@UseGuards(TokenValidationGuard)
+// @UseGuards(TokenValidationGuard, RolesGuard)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get()
-  getUserStart(): string {
-    console.log('get request from User here');
-    return 'User start from here';
+  // @Get()
+  // getUserStart(): string {
+  //   console.log('get request from User here');
+  //   return 'User start from here';
+  // }
+
+  @Get('/alldriverlist')
+  @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async getAllDriverList(): Promise<ApiResponse<User[]>> {
+    try {
+      const users = await this.userService.getAllDriverList();
+      return {
+        statusCode: 200,
+        message: 'All driver list retrieved successfully',
+        data: users,
+      };
+    } catch (error) {
+      console.error('Error getting all driver list:', error);
+      return {
+        statusCode: 500,
+        message: 'An error occurred while retrieving all driver list',
+        data: null,
+      };
+    }
+  }
+
+  @Get('/allcustomerlist')
+  @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async getAllCustomerList(): Promise<ApiResponse<User[]>> {
+    try {
+      const users = await this.userService.getAllCustomerList();
+      return {
+        statusCode: 200,
+        message: 'All customer list retrieved successfully',
+        data: users,
+      };
+    } catch (error) {
+      console.error('Error getting all customer list:', error);
+      return {
+        statusCode: 500,
+        message: 'An error occurred while retrieving all customer list',
+        data: null,
+      };
+    }
   }
 
   @Get(':email')

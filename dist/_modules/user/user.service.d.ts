@@ -4,6 +4,8 @@ export declare class UserService {
     private readonly userRepository;
     constructor(userRepository: UserRepository);
     findByEmail(email: string): Promise<User | undefined>;
+    getAllDriverList(): Promise<User[] | undefined>;
+    getAllCustomerList(): Promise<User[] | undefined>;
     findUserById(id: number): Promise<User | undefined>;
     updateUserDetails(id: number, updateData: {
         name: string;

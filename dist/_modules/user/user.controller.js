@@ -16,13 +16,47 @@ exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const token_validation_guard_1 = require("../../guards/token-validation.guard");
+const roles_decorator_1 = require("../auth/jwt/roles.decorator");
+const roles_guard_1 = require("../auth/jwt/roles.guard");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
-    getUserStart() {
-        console.log('get request from User here');
-        return 'User start from here';
+    async getAllDriverList() {
+        try {
+            const users = await this.userService.getAllDriverList();
+            return {
+                statusCode: 200,
+                message: 'All driver list retrieved successfully',
+                data: users,
+            };
+        }
+        catch (error) {
+            console.error('Error getting all driver list:', error);
+            return {
+                statusCode: 500,
+                message: 'An error occurred while retrieving all driver list',
+                data: null,
+            };
+        }
+    }
+    async getAllCustomerList() {
+        try {
+            const users = await this.userService.getAllCustomerList();
+            return {
+                statusCode: 200,
+                message: 'All customer list retrieved successfully',
+                data: users,
+            };
+        }
+        catch (error) {
+            console.error('Error getting all customer list:', error);
+            return {
+                statusCode: 500,
+                message: 'An error occurred while retrieving all customer list',
+                data: null,
+            };
+        }
     }
     async getUserByEmail(email) {
         return this.userService.findByEmail(email);
@@ -96,11 +130,21 @@ let UserController = class UserController {
 };
 exports.UserController = UserController;
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('/alldriverlist'),
+    (0, roles_decorator_1.Roles)('Admin', 'SuperAdmin'),
+    (0, common_1.UseGuards)(token_validation_guard_1.TokenValidationGuard, roles_guard_1.RolesGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], UserController.prototype, "getUserStart", null);
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getAllDriverList", null);
+__decorate([
+    (0, common_1.Get)('/allcustomerlist'),
+    (0, roles_decorator_1.Roles)('Admin', 'SuperAdmin'),
+    (0, common_1.UseGuards)(token_validation_guard_1.TokenValidationGuard, roles_guard_1.RolesGuard),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getAllCustomerList", null);
 __decorate([
     (0, common_1.Get)(':email'),
     __param(0, (0, common_1.Param)('email')),
@@ -126,7 +170,6 @@ __decorate([
 ], UserController.prototype, "updateUser", null);
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)('user'),
-    (0, common_1.UseGuards)(token_validation_guard_1.TokenValidationGuard),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);
 //# sourceMappingURL=user.controller.js.map
