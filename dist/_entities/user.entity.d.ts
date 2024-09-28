@@ -1,4 +1,5 @@
 import { Car } from './car.entity';
+import { CarBooking } from './car_booking.entity';
 export declare class User {
     userId: number;
     name: string;
@@ -12,6 +13,7 @@ export declare class User {
     password: string;
     role: string;
     cars: Car[];
+    bookings: CarBooking[];
     access_token: string;
     refresh_token: string;
     access_tokenExpiresIn: string;

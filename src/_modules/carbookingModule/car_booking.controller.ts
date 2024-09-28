@@ -324,6 +324,32 @@ export class CarBookingController {
     }
   }
 
+  @Put('assign-driver/:id')
+  @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async assignDriver(
+    @Param('id') id: string,
+    @Body('driverId') driverId: number,
+  ) {
+    try {
+      const booking = await this.carBookingService.assigndriver(+id, driverId);
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Car booking Driver was successfully updated',
+        data: booking,
+      };
+    } catch (error) {
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: 'An error occurred while updating the car booking Driver',
+          error: error.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   @Put('update/:id')
   @Roles('Customer', 'Admin', 'SuperAdmin')
   @UseGuards(TokenValidationGuard, RolesGuard)

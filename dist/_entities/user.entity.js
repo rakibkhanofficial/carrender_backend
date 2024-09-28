@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
 const car_entity_1 = require("./car.entity");
+const car_booking_entity_1 = require("./car_booking.entity");
 let User = class User {
 };
 exports.User = User;
@@ -63,6 +64,10 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => car_entity_1.Car, (car) => car.user),
     __metadata("design:type", Array)
 ], User.prototype, "cars", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => car_booking_entity_1.CarBooking, (carBooking) => carBooking.driver),
+    __metadata("design:type", Array)
+], User.prototype, "bookings", void 0);
 __decorate([
     (0, typeorm_1.Column)({ unique: false, nullable: true }),
     __metadata("design:type", String)

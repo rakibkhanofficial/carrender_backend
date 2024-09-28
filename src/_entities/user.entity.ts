@@ -1,6 +1,7 @@
 // src/entities/user.entity.ts
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Car } from './car.entity';
+import { CarBooking } from './car_booking.entity';
 
 @Entity()
 export class User {
@@ -39,6 +40,10 @@ export class User {
 
   @OneToMany(() => Car, (car) => car.user)
   cars: Car[];
+
+  // New OneToMany relation with CarBooking as driver
+  @OneToMany(() => CarBooking, (carBooking) => carBooking.driver)
+  bookings: CarBooking[]; // This will represent the bookings where the user is a driver
 
   @Column({ unique: false, nullable: true })
   access_token: string;

@@ -27,6 +27,15 @@ export class CarBooking {
   @JoinColumn({ name: 'carId' })
   car: Car;
 
+  // New nullable driverId column
+  @Column({ type: 'number', nullable: true })
+  driverId: number | null;
+
+  // Relation to the User entity with the role of Driver
+  @ManyToOne(() => User, (user) => user.bookings)
+  @JoinColumn({ name: 'driverId' })
+  driver: User | null;
+
   @Column({ type: 'varchar', length: 50, nullable: false })
   tripType: string;
 

@@ -448,6 +448,15 @@ export class CarBookingService {
     return this.carBookingRepository.save(booking);
   }
 
+  async assigndriver(id: number, driverId: number) {
+    const booking = await this.findOneById(id);
+    if (!booking) {
+      throw new NotFoundException(`Booking with ID ${id} not found`);
+    }
+    booking.driverId = driverId;
+    return this.carBookingRepository.save(booking);
+  }
+
   async remove(id: number, userId: number): Promise<void> {
     const carBooking = await this.findOne(id, userId);
     await this.carBookingRepository.remove(carBooking);
