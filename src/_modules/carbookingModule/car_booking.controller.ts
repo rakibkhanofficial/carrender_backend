@@ -198,6 +198,35 @@ export class CarBookingController {
     }
   }
 
+  @Get('/carbookingassignedlistfordriver/:page/:limit')
+  @Roles('Driver')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async findAllAssignedBookingForDriver(
+    @Res() response: Response,
+    @Req() request: RequestWithUser,
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+  ) {
+    try {
+      const data = await this.carBookingService.findAllAssignedBookingfordriver(
+        page,
+        limit,
+        request.user.userId,
+      );
+      return response.status(200).json({
+        statusCode: 200,
+        message: ' Car booking list was successfully retrieved',
+        data,
+      });
+    } catch (error) {
+      return response.status(500).json({
+        statusCode: 500,
+        message: 'An error occurred while fetching the car booking list',
+        error: error.message,
+      });
+    }
+  }
+
   @Get('/admincarbookingcompletelist/:page/:limit')
   @Roles('Admin', 'SuperAdmin')
   @UseGuards(TokenValidationGuard, RolesGuard)
@@ -211,6 +240,37 @@ export class CarBookingController {
         page,
         limit,
       );
+      return response.status(200).json({
+        statusCode: 200,
+        message: 'Completed Car booking list was successfully retrieved',
+        data,
+      });
+    } catch (error) {
+      return response.status(500).json({
+        statusCode: 500,
+        message:
+          'An error occurred while fetching the Completed car booking list',
+        error: error.message,
+      });
+    }
+  }
+
+  @Get('/carbookingcompletelistfordriver/:page/:limit')
+  @Roles('Driver')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async findAllCompleteBookingForDriver(
+    @Res() response: Response,
+    @Req() request: RequestWithUser,
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+  ) {
+    try {
+      const data =
+        await this.carBookingService.findAllCompletedBookingfordriver(
+          page,
+          limit,
+          request.user.userId,
+        );
       return response.status(200).json({
         statusCode: 200,
         message: 'Completed Car booking list was successfully retrieved',
@@ -249,6 +309,36 @@ export class CarBookingController {
         statusCode: 500,
         message:
           'An error occurred while fetching the Canceled car booking list',
+        error: error.message,
+      });
+    }
+  }
+
+  @Get('/carbookingcnceledlistfordriver/:page/:limit')
+  @Roles('Driver')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async findAllCanceledBookingForDriver(
+    @Res() response: Response,
+    @Req() request: RequestWithUser,
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+  ) {
+    try {
+      const data = await this.carBookingService.findAllCanceledBookingfordriver(
+        page,
+        limit,
+        request.user.userId,
+      );
+      return response.status(200).json({
+        statusCode: 200,
+        message: 'Completed Car booking list was successfully retrieved',
+        data,
+      });
+    } catch (error) {
+      return response.status(500).json({
+        statusCode: 500,
+        message:
+          'An error occurred while fetching the Completed car booking list',
         error: error.message,
       });
     }
@@ -301,8 +391,35 @@ export class CarBookingController {
     }
   }
 
+  @Get('/carbookingdetailsfordriver/:id')
+  @Roles('Driver')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async findAssignOneforDriver(
+    @Req() request: RequestWithUser,
+    @Res() response: Response,
+    @Param('id') id: string,
+  ) {
+    try {
+      const booking = await this.carBookingService.findAssignOneBydriverId(
+        +id,
+        request.user.userId,
+      );
+      return response.status(200).json({
+        statusCode: 200,
+        message: 'Car booking was successfully retrieved',
+        data: booking,
+      });
+    } catch (error) {
+      return response.status(500).json({
+        statusCode: 500,
+        message: 'An error occurred while fetching the car booking',
+        error: error.message,
+      });
+    }
+  }
+
   @Put('update-status/:id')
-  @Roles('Admin', 'SuperAdmin')
+  @Roles('Admin', 'SuperAdmin', 'Driver')
   @UseGuards(TokenValidationGuard, RolesGuard)
   async updateStatus(@Param('id') id: string, @Body('status') status: string) {
     try {
