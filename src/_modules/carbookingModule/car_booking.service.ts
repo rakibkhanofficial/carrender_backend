@@ -134,6 +134,216 @@ export class CarBookingService {
     };
   }
 
+  async findAllPendingBookingforadmin(
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<{
+    data: Partial<CarBooking>[];
+    total: number;
+    page: number;
+    limit: number;
+  }> {
+    const [bookings, total] = await this.carBookingRepository.findAndCount({
+      skip: (page - 1) * limit,
+      take: limit,
+      order: { createdAt: 'DESC' },
+      where: { rideStatus: 'Pending' },
+      select: [
+        'id',
+        'tripType',
+        'totalBookingPrice',
+        'rideStatus',
+        'paymentMethod',
+        'paymentStatus',
+        'carImage',
+        'pickupDate',
+        'pickupTime',
+        'pickupLocationAddress',
+        'pickupLocationMapLink',
+        'dropoffLocationAddress',
+        'dropoffLocationMapLink',
+        'hour',
+        'distance',
+        'createdAt',
+        'updatedAt',
+      ],
+    });
+    return {
+      data: bookings,
+      total,
+      page,
+      limit,
+    };
+  }
+
+  async findAllAcceptedBookingforadmin(
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<{
+    data: Partial<CarBooking>[];
+    total: number;
+    page: number;
+    limit: number;
+  }> {
+    const [bookings, total] = await this.carBookingRepository.findAndCount({
+      skip: (page - 1) * limit,
+      take: limit,
+      order: { createdAt: 'DESC' },
+      where: { rideStatus: 'Accepted' },
+      select: [
+        'id',
+        'tripType',
+        'totalBookingPrice',
+        'rideStatus',
+        'paymentMethod',
+        'paymentStatus',
+        'carImage',
+        'pickupDate',
+        'pickupTime',
+        'pickupLocationAddress',
+        'pickupLocationMapLink',
+        'dropoffLocationAddress',
+        'dropoffLocationMapLink',
+        'hour',
+        'distance',
+        'createdAt',
+        'updatedAt',
+      ],
+    });
+    return {
+      data: bookings,
+      total,
+      page,
+      limit,
+    };
+  }
+
+  async findAllAssignedBookingforadmin(
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<{
+    data: Partial<CarBooking>[];
+    total: number;
+    page: number;
+    limit: number;
+  }> {
+    const [bookings, total] = await this.carBookingRepository.findAndCount({
+      skip: (page - 1) * limit,
+      take: limit,
+      order: { createdAt: 'DESC' },
+      where: { rideStatus: 'Assigned' },
+      select: [
+        'id',
+        'tripType',
+        'totalBookingPrice',
+        'rideStatus',
+        'paymentMethod',
+        'paymentStatus',
+        'carImage',
+        'pickupDate',
+        'pickupTime',
+        'pickupLocationAddress',
+        'pickupLocationMapLink',
+        'dropoffLocationAddress',
+        'dropoffLocationMapLink',
+        'hour',
+        'distance',
+        'createdAt',
+        'updatedAt',
+      ],
+    });
+    return {
+      data: bookings,
+      total,
+      page,
+      limit,
+    };
+  }
+
+  async findAllCompletedBookingforadmin(
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<{
+    data: Partial<CarBooking>[];
+    total: number;
+    page: number;
+    limit: number;
+  }> {
+    const [bookings, total] = await this.carBookingRepository.findAndCount({
+      skip: (page - 1) * limit,
+      take: limit,
+      order: { createdAt: 'DESC' },
+      where: { rideStatus: 'Completed' },
+      select: [
+        'id',
+        'tripType',
+        'totalBookingPrice',
+        'rideStatus',
+        'paymentMethod',
+        'paymentStatus',
+        'carImage',
+        'pickupDate',
+        'pickupTime',
+        'pickupLocationAddress',
+        'pickupLocationMapLink',
+        'dropoffLocationAddress',
+        'dropoffLocationMapLink',
+        'hour',
+        'distance',
+        'createdAt',
+        'updatedAt',
+      ],
+    });
+    return {
+      data: bookings,
+      total,
+      page,
+      limit,
+    };
+  }
+
+  async findAllCancelBookingforadmin(
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<{
+    data: Partial<CarBooking>[];
+    total: number;
+    page: number;
+    limit: number;
+  }> {
+    const [bookings, total] = await this.carBookingRepository.findAndCount({
+      skip: (page - 1) * limit,
+      take: limit,
+      order: { createdAt: 'DESC' },
+      where: { rideStatus: 'Canceled' },
+      select: [
+        'id',
+        'tripType',
+        'totalBookingPrice',
+        'rideStatus',
+        'paymentMethod',
+        'paymentStatus',
+        'carImage',
+        'pickupDate',
+        'pickupTime',
+        'pickupLocationAddress',
+        'pickupLocationMapLink',
+        'dropoffLocationAddress',
+        'dropoffLocationMapLink',
+        'hour',
+        'distance',
+        'createdAt',
+        'updatedAt',
+      ],
+    });
+    return {
+      data: bookings,
+      total,
+      page,
+      limit,
+    };
+  }
+
   async adminfindOne(id: number): Promise<CarBooking> {
     const carBooking = await this.carBookingRepository.findOne({
       where: { id },

@@ -87,7 +87,7 @@ export class CarBookingController {
     }
   }
 
-  @Get('/admincarBookinlist/:page/:limit')
+  @Get('/admincarbookinglist/:page/:limit')
   @Roles('Admin', 'SuperAdmin')
   @UseGuards(TokenValidationGuard, RolesGuard)
   async findAllBookingForAdmin(
@@ -109,6 +109,146 @@ export class CarBookingController {
       return response.status(500).json({
         statusCode: 500,
         message: 'An error occurred while fetching the car booking list',
+        error: error.message,
+      });
+    }
+  }
+
+  @Get('/admincarbookingpendinglist/:page/:limit')
+  @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async findAllPendingBookingForAdmin(
+    @Res() response: Response,
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+  ) {
+    try {
+      const data = await this.carBookingService.findAllPendingBookingforadmin(
+        page,
+        limit,
+      );
+      return response.status(200).json({
+        statusCode: 200,
+        message: 'Pending Car booking list was successfully retrieved',
+        data,
+      });
+    } catch (error) {
+      return response.status(500).json({
+        statusCode: 500,
+        message:
+          'An error occurred while fetching the Pending car booking list',
+        error: error.message,
+      });
+    }
+  }
+
+  @Get('/admincarbookingacceptedlist/:page/:limit')
+  @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async findAllAcceptedBookingForAdmin(
+    @Res() response: Response,
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+  ) {
+    try {
+      const data = await this.carBookingService.findAllAcceptedBookingforadmin(
+        page,
+        limit,
+      );
+      return response.status(200).json({
+        statusCode: 200,
+        message: 'Accepted Car booking list was successfully retrieved',
+        data,
+      });
+    } catch (error) {
+      return response.status(500).json({
+        statusCode: 500,
+        message:
+          'An error occurred while fetching the Accepted car booking list',
+        error: error.message,
+      });
+    }
+  }
+
+  @Get('/admincarbookingassignedlist/:page/:limit')
+  @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async findAllAssignedBookingForAdmin(
+    @Res() response: Response,
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+  ) {
+    try {
+      const data = await this.carBookingService.findAllAssignedBookingforadmin(
+        page,
+        limit,
+      );
+      return response.status(200).json({
+        statusCode: 200,
+        message: 'Assigned Car booking list was successfully retrieved',
+        data,
+      });
+    } catch (error) {
+      return response.status(500).json({
+        statusCode: 500,
+        message:
+          'An error occurred while fetching the Assigned car booking list',
+        error: error.message,
+      });
+    }
+  }
+
+  @Get('/admincarbookingcompletelist/:page/:limit')
+  @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async findAllCompleteBookingForAdmin(
+    @Res() response: Response,
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+  ) {
+    try {
+      const data = await this.carBookingService.findAllCompletedBookingforadmin(
+        page,
+        limit,
+      );
+      return response.status(200).json({
+        statusCode: 200,
+        message: 'Completed Car booking list was successfully retrieved',
+        data,
+      });
+    } catch (error) {
+      return response.status(500).json({
+        statusCode: 500,
+        message:
+          'An error occurred while fetching the Completed car booking list',
+        error: error.message,
+      });
+    }
+  }
+
+  @Get('/admincarbookingcanceledlist/:page/:limit')
+  @Roles('Admin', 'SuperAdmin')
+  @UseGuards(TokenValidationGuard, RolesGuard)
+  async findAllCanceledBookingForAdmin(
+    @Res() response: Response,
+    @Param('page') page: number,
+    @Param('limit') limit: number,
+  ) {
+    try {
+      const data = await this.carBookingService.findAllCancelBookingforadmin(
+        page,
+        limit,
+      );
+      return response.status(200).json({
+        statusCode: 200,
+        message: 'Canceled Car booking list was successfully retrieved',
+        data,
+      });
+    } catch (error) {
+      return response.status(500).json({
+        statusCode: 500,
+        message:
+          'An error occurred while fetching the Canceled car booking list',
         error: error.message,
       });
     }
