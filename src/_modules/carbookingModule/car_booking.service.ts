@@ -347,7 +347,7 @@ export class CarBookingService {
   async adminfindOne(id: number): Promise<CarBooking> {
     const carBooking = await this.carBookingRepository.findOne({
       where: { id },
-      relations: ['car', 'user'],
+      relations: ['car', 'user', 'driver'],
       select: {
         id: true,
         tripType: true,
@@ -398,7 +398,7 @@ export class CarBookingService {
   async findOne(id: number, userId: number): Promise<CarBooking> {
     const carBooking = await this.carBookingRepository.findOne({
       where: { id, userId },
-      relations: ['car', 'user'],
+      relations: ['car', 'user', 'driver'],
     });
 
     if (!carBooking) {
