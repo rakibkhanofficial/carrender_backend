@@ -376,11 +376,13 @@ export class CarBookingService {
           fuelType: true,
         },
         user: {
+          userId: true,
           name: true,
           email: true,
           phone: true,
         },
         driver: {
+          userId: true,
           name: true,
           email: true,
           phone: true,
