@@ -380,6 +380,11 @@ export class CarBookingService {
           email: true,
           phone: true,
         },
+        driver: {
+          name: true,
+          email: true,
+          phone: true,
+        },
       },
     });
 
