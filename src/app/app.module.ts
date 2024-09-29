@@ -17,6 +17,7 @@ import { CategoryModule } from '../_modules/category/category.module';
 import { SubCategoryModule } from '../_modules/subcategory/subcategory.module';
 import { CarBookingModule } from '../_modules/carbookingModule/car_booking.module';
 import { PaymentModule } from '../_modules/paymentmodule/payment.module';
+import { DashboardModule } from '../_modules/dashboardModule/dashboard.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { PaymentModule } from '../_modules/paymentmodule/payment.module';
     CarModule,
     CarBookingModule,
     PaymentModule,
+    DashboardModule,
   ],
   controllers: [AppController, BlobController],
   providers: [JwtService, AppService, BlobService],
