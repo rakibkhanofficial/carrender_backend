@@ -32,6 +32,7 @@ export interface UserDashboardData {
   totalBookings: number;
   totalSpent: number;
   userBookingData: MonthlyData[];
+  pieDonutData: PieDonutData;
 }
 
 @Injectable()
@@ -61,12 +62,24 @@ export class DashboardService {
       .orderBy('month', 'ASC')
       .getRawMany();
 
-    const bookingCategories = await this.carBookingRepository
+    // const bookingCategories = await this.carBookingRepository
+    //   .createQueryBuilder('booking')
+    //   .select('booking.tripType', 'category')
+    //   .addSelect('COUNT(*)', 'count')
+    //   .groupBy('booking.tripType')
+    //   .getRawMany();
+
+    const tripTypeData = await this.carBookingRepository
       .createQueryBuilder('booking')
-      .select('booking.tripType', 'category')
+      .select('booking.tripType', 'type')
       .addSelect('COUNT(*)', 'count')
       .groupBy('booking.tripType')
       .getRawMany();
+
+    const pieDonutData = {
+      labels: tripTypeData.map((item) => item.type),
+      values: tripTypeData.map((item) => parseInt(item.count)),
+    };
 
     return {
       totalBookings,
@@ -75,10 +88,7 @@ export class DashboardService {
         x: item.month,
         y: parseInt(item.count),
       })),
-      pieDonutData: {
-        labels: bookingCategories.map((item) => item.category),
-        values: bookingCategories.map((item) => parseInt(item.count)),
-      },
+      pieDonutData,
     };
   }
 
@@ -106,6 +116,19 @@ export class DashboardService {
       .orderBy('month', 'ASC')
       .getRawMany();
 
+    const tripTypeData = await this.carBookingRepository
+      .createQueryBuilder('booking')
+      .select('booking.tripType', 'type')
+      .addSelect('COUNT(*)', 'count')
+      .where('booking.userId = :userId', { userId })
+      .groupBy('booking.tripType')
+      .getRawMany();
+
+    const pieDonutData = {
+      labels: tripTypeData.map((item) => item.type),
+      values: tripTypeData.map((item) => parseInt(item.count)),
+    };
+
     return {
       totalBookings,
       totalSpent,
@@ -113,6 +136,7 @@ export class DashboardService {
         x: item.month,
         y: parseInt(item.count),
       })),
+      pieDonutData,
     };
   }
 
@@ -140,6 +164,19 @@ export class DashboardService {
       .orderBy('month', 'ASC')
       .getRawMany();
 
+    const tripTypeData = await this.carBookingRepository
+      .createQueryBuilder('booking')
+      .select('booking.tripType', 'type')
+      .addSelect('COUNT(*)', 'count')
+      .where('booking.driverId = :driverId', { driverId })
+      .groupBy('booking.tripType')
+      .getRawMany();
+
+    const pieDonutData = {
+      labels: tripTypeData.map((item) => item.type),
+      values: tripTypeData.map((item) => parseInt(item.count)),
+    };
+
     return {
       totalBookings,
       totalSpent,
@@ -147,6 +184,7 @@ export class DashboardService {
         x: item.month,
         y: parseInt(item.count),
       })),
+      pieDonutData,
     };
   }
 
