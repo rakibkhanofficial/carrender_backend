@@ -151,7 +151,7 @@ export class DashboardController {
   }
 
   @Get('driver/booking-list-type')
-  @Roles('Customer')
+  @Roles('Driver')
   async getDriverBookingListType(@Req() request: RequestWithUser): Promise<{
     statusCode: HttpStatus;
     message: string;

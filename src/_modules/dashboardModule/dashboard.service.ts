@@ -35,6 +35,13 @@ export interface UserDashboardData {
   pieDonutData: PieDonutData;
 }
 
+export interface DriverDashboardData {
+  totalBookings: number;
+  totalEarn: number;
+  userBookingData: MonthlyData[];
+  pieDonutData: PieDonutData;
+}
+
 @Injectable()
 export class DashboardService {
   constructor(
@@ -140,19 +147,19 @@ export class DashboardService {
     };
   }
 
-  async getDriverDashboardData(driverId: number): Promise<UserDashboardData> {
+  async getDriverDashboardData(driverId: number): Promise<DriverDashboardData> {
     const totalBookings = await this.carBookingRepository.count({
       where: { driverId: driverId },
     });
 
-    const totalSpentResult = await this.carBookingRepository
+    const totalEarnResult = await this.carBookingRepository
       .createQueryBuilder('booking')
       .select('SUM(booking.totalBookingPrice)', 'total')
       .where('booking.driverId = :driverId', { driverId })
       .getRawOne();
 
-    const totalSpent = totalSpentResult
-      ? parseFloat(totalSpentResult.total) || 0
+    const totalEarn = totalEarnResult
+      ? parseFloat(totalEarnResult.total) || 0
       : 0;
 
     const userBookingData = await this.carBookingRepository
@@ -179,7 +186,7 @@ export class DashboardService {
 
     return {
       totalBookings,
-      totalSpent,
+      totalEarn,
       userBookingData: userBookingData.map((item) => ({
         x: item.month,
         y: parseInt(item.count),
