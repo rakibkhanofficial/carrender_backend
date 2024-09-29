@@ -55,6 +55,7 @@ export class DashboardService {
     const totalRevenueResult = await this.carBookingRepository
       .createQueryBuilder('booking')
       .select('SUM(booking.totalBookingPrice)', 'total')
+      .where('booking.rideStatus = :rideStatus', { rideStatus: 'Completed' })
       .getRawOne();
 
     const totalRevenue = totalRevenueResult
@@ -108,6 +109,7 @@ export class DashboardService {
       .createQueryBuilder('booking')
       .select('SUM(booking.totalBookingPrice)', 'total')
       .where('booking.userId = :userId', { userId })
+      .andWhere('booking.rideStatus = :rideStatus', { rideStatus: 'Completed' })
       .getRawOne();
 
     const totalSpent = totalSpentResult
@@ -156,6 +158,7 @@ export class DashboardService {
       .createQueryBuilder('booking')
       .select('SUM(booking.totalBookingPrice)', 'total')
       .where('booking.driverId = :driverId', { driverId })
+      .andWhere('booking.rideStatus = :rideStatus', { rideStatus: 'Completed' })
       .getRawOne();
 
     const totalEarn = totalEarnResult
