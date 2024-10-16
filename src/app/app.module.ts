@@ -18,6 +18,7 @@ import { SubCategoryModule } from '../_modules/subcategory/subcategory.module';
 import { CarBookingModule } from '../_modules/carbookingModule/car_booking.module';
 import { PaymentModule } from '../_modules/paymentmodule/payment.module';
 import { DashboardModule } from '../_modules/dashboardModule/dashboard.module';
+import { CardModule } from '../_modules/cardmodule/card.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { DashboardModule } from '../_modules/dashboardModule/dashboard.module';
     CarBookingModule,
     PaymentModule,
     DashboardModule,
+    CardModule,
   ],
   controllers: [AppController, BlobController],
   providers: [JwtService, AppService, BlobService],
