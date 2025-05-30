@@ -1,9 +1,0 @@
-export declare const SUCCESS: number;
-export declare const NO_DATA_FOUND: number;
-export declare const NOT_FOUND: number;
-export declare const INACTIVE: number;
-export declare const NOT_ALLOWED: number;
-export declare const ERROR: number;
-export declare const REQUEST_ERROR: number;
-export declare const CONFLICT: number;
-export declare const UNAUTHORIZED: number;
