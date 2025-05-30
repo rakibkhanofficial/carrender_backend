@@ -14,3 +14,4 @@ exports.typeOrmConfig = {
     entities: [(0, path_1.join)(__dirname, '..', '**', '*.entity.{js,ts}')],
     synchronize: true,
 };
+//# sourceMappingURL=database.config.js.map

@@ -27,3 +27,4 @@ exports.SubCategoryModule = SubCategoryModule = __decorate([
         exports: [typeorm_1.TypeOrmModule],
     })
 ], SubCategoryModule);
+//# sourceMappingURL=subcategory.module.js.map

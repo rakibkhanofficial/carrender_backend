@@ -10,3 +10,4 @@ const isEmpty = (data) => {
     return data == null || data === '' || data.length === 0;
 };
 exports.isEmpty = isEmpty;
+//# sourceMappingURL=index.js.map

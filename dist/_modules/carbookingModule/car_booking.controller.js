@@ -562,3 +562,4 @@ exports.CarBookingController = CarBookingController = __decorate([
     (0, common_1.Controller)('car-bookings'),
     __metadata("design:paramtypes", [car_booking_service_1.CarBookingService])
 ], CarBookingController);
+//# sourceMappingURL=car_booking.controller.js.map

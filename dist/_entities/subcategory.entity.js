@@ -64,3 +64,4 @@ __decorate([
 exports.SubCategory = SubCategory = __decorate([
     (0, typeorm_1.Entity)('tblSubCategory')
 ], SubCategory);
+//# sourceMappingURL=subcategory.entity.js.map

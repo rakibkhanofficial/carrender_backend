@@ -64,3 +64,4 @@ else {
         app.getHttpAdapter().getInstance()(req, res);
     };
 }
+//# sourceMappingURL=main.js.map

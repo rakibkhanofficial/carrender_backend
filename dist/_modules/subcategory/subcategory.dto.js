@@ -4,3 +4,4 @@ exports.SubCategoryDto = void 0;
 class SubCategoryDto {
 }
 exports.SubCategoryDto = SubCategoryDto;
+//# sourceMappingURL=subcategory.dto.js.map

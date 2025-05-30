@@ -59,3 +59,4 @@ __decorate([
 exports.Category = Category = __decorate([
     (0, typeorm_1.Entity)('tblCategory')
 ], Category);
+//# sourceMappingURL=category.entity.js.map

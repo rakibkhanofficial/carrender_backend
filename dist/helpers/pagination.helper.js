@@ -11,3 +11,4 @@ const paginate = ({ page, limit, total_items }) => {
     };
 };
 exports.paginate = paginate;
+//# sourceMappingURL=pagination.helper.js.map

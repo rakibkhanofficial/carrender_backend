@@ -50,3 +50,4 @@ exports.BlobService = BlobService = BlobService_1 = __decorate([
     __param(0, (0, typeorm_1.InjectRepository)(image_entity_1.Image)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], BlobService);
+//# sourceMappingURL=blob.service.js.map

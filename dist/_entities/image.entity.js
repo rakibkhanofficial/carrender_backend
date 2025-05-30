@@ -33,3 +33,4 @@ __decorate([
 exports.Image = Image = __decorate([
     (0, typeorm_1.Entity)()
 ], Image);
+//# sourceMappingURL=image.entity.js.map

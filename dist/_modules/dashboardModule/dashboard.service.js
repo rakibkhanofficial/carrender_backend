@@ -202,3 +202,4 @@ exports.DashboardService = DashboardService = __decorate([
     __param(0, (0, typeorm_1.InjectRepository)(car_booking_entity_1.CarBooking)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], DashboardService);
+//# sourceMappingURL=dashboard.service.js.map

@@ -49,3 +49,4 @@ __decorate([
 exports.Card = Card = __decorate([
     (0, typeorm_1.Entity)()
 ], Card);
+//# sourceMappingURL=card.entity.js.map

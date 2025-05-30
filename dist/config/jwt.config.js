@@ -9,3 +9,4 @@ exports.jwtConfig = {
         expiresIn: '3600s',
     },
 };
+//# sourceMappingURL=jwt.config.js.map

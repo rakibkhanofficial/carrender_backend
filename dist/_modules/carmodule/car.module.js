@@ -31,3 +31,4 @@ exports.CarModule = CarModule = __decorate([
         exports: [car_service_1.CarService],
     })
 ], CarModule);
+//# sourceMappingURL=car.module.js.map

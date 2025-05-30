@@ -57,3 +57,4 @@ exports.BlobController = BlobController = __decorate([
     (0, common_1.Controller)('blob'),
     __metadata("design:paramtypes", [blob_service_1.BlobService])
 ], BlobController);
+//# sourceMappingURL=blob.controller.js.map

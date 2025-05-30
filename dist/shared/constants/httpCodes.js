@@ -10,3 +10,4 @@ exports.ERROR = 500;
 exports.REQUEST_ERROR = 400;
 exports.CONFLICT = 409;
 exports.UNAUTHORIZED = 401;
+//# sourceMappingURL=httpCodes.js.map

@@ -8,3 +8,4 @@ const handleInternalError = (error, res) => {
     });
 };
 exports.handleInternalError = handleInternalError;
+//# sourceMappingURL=handleInternalError.js.map

@@ -139,3 +139,4 @@ __decorate([
 exports.Car = Car = __decorate([
     (0, typeorm_1.Entity)('tblCar')
 ], Car);
+//# sourceMappingURL=car.entity.js.map

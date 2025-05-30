@@ -37,3 +37,4 @@ __decorate([
 exports.Otp = Otp = __decorate([
     (0, typeorm_1.Entity)()
 ], Otp);
+//# sourceMappingURL=otp.entity.js.map

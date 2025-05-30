@@ -68,3 +68,4 @@ exports.SubCategoryService = SubCategoryService = __decorate([
     __param(0, (0, typeorm_1.InjectRepository)(subcategory_entity_1.SubCategory)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], SubCategoryService);
+//# sourceMappingURL=subcategory.service.js.map

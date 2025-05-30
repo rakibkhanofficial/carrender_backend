@@ -146,3 +146,4 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateCarBookingDto.prototype, "stripePaymentIntentId", void 0);
+//# sourceMappingURL=car_booking.dto.js.map

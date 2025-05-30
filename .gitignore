@@ -1,7 +1,7 @@
 # compiled output
 /node_modules
 /build
-/tsconfig.build.json
+# /tsconfig.build.json
 # Logs
 logs
 *.log
